@@ -3,6 +3,7 @@
 
 #include "playerCharacter.h"
 #include "Components/CapsuleComponent.h"
+#include "GameFramework/SpringArmComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
 
 // Sets default values
@@ -33,9 +34,7 @@ AplayerCharacter::AplayerCharacter()
 	CameraComp = CreateDefaultSubobject<UCameraComponent>(TEXT("CameraComp"));
 	// Attaching your class Components to the default character's Skeletal Mesh Component.
 
-	CameraComp->SetupAttachment(RootComponent);
-
-	CameraComp->SetRelativeLocation(FVector(0, 0, 110));
+	
 
 	//Setting class variables of the Character movement component
 
@@ -44,6 +43,18 @@ AplayerCharacter::AplayerCharacter()
 	GetCharacterMovement()->bIgnoreBaseRotation = true;
 
 	GetCharacterMovement()->JumpZVelocity = 500.f;
+
+	// Create a Spring Arm component
+	USpringArmComponent* SpringArm = CreateDefaultSubobject<USpringArmComponent>(TEXT("SpringArm"));
+	SpringArm->SetupAttachment(RootComponent);
+
+	// Adjust the Spring Arm properties
+	SpringArm->TargetArmLength = 300.0f; // The camera follows at this distance behind the character 
+	SpringArm->bUsePawnControlRotation = true; // Rotate the arm based on the controller
+
+	// Adjust the Camera component setup
+	CameraComp->SetupAttachment(SpringArm, USpringArmComponent::SocketName); // Attach the Camera to the Spring Arm
+	CameraComp->SetRelativeLocation(FVector(0, 0, 110));
 }
 
 void AplayerCharacter::MoveCylinderForward(float Value)
