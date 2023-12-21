@@ -3,6 +3,10 @@
 
 #include "material_limb.h"
 
+Umaterial_limb::Umaterial_limb()
+{
+}
+
 // Sets default values
 Umaterial_limb::Umaterial_limb(BodyParts BodyPartsName):BodyPartsName(BodyPartsName)
 {

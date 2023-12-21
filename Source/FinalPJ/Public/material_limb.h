@@ -55,7 +55,8 @@ class FINALPJ_API Umaterial_limb : public UMyItem
 
 public:
     // Sets default values for this actor's properties
-  
+    Umaterial_limb();
+    Umaterial_limb(BodyParts BodyPartsName);
     MaterialType type;
     MaterialType GetType() const { return type; }
     Weight GetMass() const { return mass; }
@@ -66,7 +67,7 @@ public:
     BodyParts GetBodyPart() const { return BodyPartsName; }
 public:
 
-    Umaterial_limb(BodyParts BodyPartsName);
+    
 
     virtual void Use() override;
 
