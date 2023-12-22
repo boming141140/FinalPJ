@@ -12,3 +12,22 @@ void UMyUserWidget::UpdateText(const FText& NewText)
         MyTextBlock->SetText(NewText);
     }
 }
+
+void UMyUserWidget::ShowFKey()
+{
+    if (InteractButton)
+    {
+        // Set the visibility of the button to Visible
+        InteractButton->SetVisibility(ESlateVisibility::Visible);
+    }
+}
+
+void UMyUserWidget::HideFKey()
+{
+    if (InteractButton)
+    {
+        // Set the visibility of the button to Hidden or Collapsed
+        InteractButton->SetVisibility(ESlateVisibility::Collapsed); // or ESlateVisibility::Hidden
+    }
+}
+

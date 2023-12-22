@@ -1,38 +1,34 @@
+// Fill out your copyright notice in the Description page of Project Settings.
+
+#pragma once
+
 #include "CoreMinimal.h"
-#include "material_limb.h"
-#include "GameFramework/Actor.h"
+#include "GameFramework/Character.h"
+#include "MyUserWidget.h"
+#include "MyInterface.h"
 #include "mannequin.generated.h"
 
 UCLASS()
-class FINALPJ_API Amannequin : public AActor
+class FINALPJ_API Amannequin : public ACharacter
 {
 	GENERATED_BODY()
 
 public:
-	// Sets default values for this actor's properties
+	// Sets default values for this character's properties
 	Amannequin();
-	Amannequin(Umaterial_limb* LeftHand, Umaterial_limb* RightHand, Umaterial_limb* LeftLeg, Umaterial_limb* RightLeg);
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
-public:
+public:	
+	UMyUserWidget* MyWidget;
+	IMyInterface* InteractableActors;
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Limbs", meta = (AllowPrivateAccess = "true"))
-	Umaterial_limb* LeftArm;
-
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Limbs", meta = (AllowPrivateAccess = "true"))
-	Umaterial_limb* RightArm;
-
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Limbs", meta = (AllowPrivateAccess = "true"))
-	Umaterial_limb* LeftLeg;
-
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Limbs", meta = (AllowPrivateAccess = "true"))
-	Umaterial_limb* RightLeg;
-
-	void StatsCheck();
-	void equip(Umaterial_limb* limbs);
-	void drop(Umaterial_limb* limbs);
+	// Called to bind functionality to input
+	virtual void SetupPlayerInputComponent(UInputComponent* PlayerInputComponent) override;
+	void AttemptInteract();
+	void RayCasting();
 };

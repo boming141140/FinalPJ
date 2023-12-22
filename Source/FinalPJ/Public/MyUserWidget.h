@@ -20,4 +20,9 @@ public:
 
     UPROPERTY(meta = (BindWidget))
     class UTextBlock* MyTextBlock;
+    UPROPERTY(meta = (BindWidget))
+    class UTextBlock* InteractButton;
+
+    void ShowFKey();
+    void HideFKey();
 };
