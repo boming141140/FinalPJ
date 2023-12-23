@@ -74,9 +74,13 @@ public:
     void setType(MaterialType NewType);
     void setBodyPart(BodyParts NewBodyPart);
 private:
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Custom")
     Weight mass;
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Custom")
     Bouncy bouncy;
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Custom")
     Length length;
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Custom")
     bool fireResist;
     int32 health;
     BodyParts BodyPartsName;
