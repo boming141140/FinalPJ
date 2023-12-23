@@ -26,8 +26,6 @@ AInteractButton::AInteractButton()
         UE_LOG(LogTemp, Warning, TEXT("Failed to load the mesh. Check the path is correct."));
     }
 
-    
-
     // In your AInteractButton.cpp
     // Inside the constructor:
     static ConstructorHelpers::FObjectFinder<UMaterialInterface> MaterialFinder(TEXT("Material'/Game/StarterContent/Materials/green_button_material1.green_button_material1'"));
@@ -61,12 +59,26 @@ void AInteractButton::OnInteract()
     switch (marker)
     {
         case 0:
-            if (ButtonMaterial != nullptr)
+        case 1:
+        case 2:
+        case 3:
+            if (ButtonMaterial != nullptr && ReferencedActor)
             {
-                MeshComponent->SetMaterial(0, ButtonMaterial);
-                togglable = false;
+                // The function name must match the exact name of the custom event in your Blueprint
+                FName FunctionName = FName(TEXT("opendoor"));
+                UFunction* Function = ReferencedActor->FindFunction(FunctionName);
+
+                if (Function)
+                {
+                    // Call the function
+                    ReferencedActor->ProcessEvent(Function, nullptr);
+                }
             }
+           
+            MeshComponent->SetMaterial(0, ButtonMaterial);
+            togglable = false;
             break;
+            
     }
 }
 

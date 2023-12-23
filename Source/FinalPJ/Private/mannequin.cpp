@@ -4,6 +4,7 @@
 #include "mannequin.h"
 #include "InteractButton.h"
 #include "MyUserWidget.h"
+#include "SpaceshipActor.h"
 #include "MyInterface.h"
 #include "GameFramework/PlayerController.h"
 
@@ -148,10 +149,19 @@ void Amannequin::AttemptInteract()
     if (MyInteractButton)
     {
         MyInteractButton->OnInteract();
+        return;
+    }
+    
+    ASpaceshipActor* MySpaceshipActor = Cast<ASpaceshipActor>(InteractableActors);
+    if (MySpaceshipActor)
+    {
+        MySpaceshipActor->OnInteract();
+        return; // If you want to only interact with the first valid spaceship actor
     }
     else
     {
-        // Handle the case where the button doesn't exist yet
-        UE_LOG(LogTemp, Warning, TEXT("InteractableActors is not set or not an AInteractButton."));
+        UE_LOG(LogTemp, Warning, TEXT("No valid spaceship actor found to interact with."));
     }
+
+
 }

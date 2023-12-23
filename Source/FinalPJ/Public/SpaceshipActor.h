@@ -3,18 +3,19 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "MyInterface.h"
 #include "GameFramework/Actor.h"
-#include "InteractButton.generated.h"
+#include "MyInterface.h"
+#include "Blueprint/UserWidget.h"
+#include "SpaceshipActor.generated.h"
 
 UCLASS()
-class FINALPJ_API AInteractButton : public AActor, public IMyInterface
+class FINALPJ_API ASpaceshipActor : public AActor, public IMyInterface
 {
 	GENERATED_BODY()
 	
 public:	
 	// Sets default values for this actor's properties
-	AInteractButton();
+	ASpaceshipActor();
 
 protected:
 	// Called when the game starts or when spawned
@@ -22,12 +23,9 @@ protected:
 
 public:	
 	// Called every frame
-	UMaterialInterface* ButtonMaterial;
-	UStaticMeshComponent* MeshComponent;
 	virtual void Tick(float DeltaTime) override;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Custom")
-	int32 marker;
 	void OnInteract();
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "References")
-	AActor* ReferencedActor; // The type can be more specific if you know what you are referencing
+	UUserWidget* ReferencedWidget;
+
 };
